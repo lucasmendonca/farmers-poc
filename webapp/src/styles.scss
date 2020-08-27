@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  background-color: #f9f9e6;
+}
+
+// Utils
+.margin-right10 {
+  margin-right: 10px;
+}
+
+// Forms
+mat-form-field.gray-field .mat-form-field-wrapper .mat-form-field-flex {
+  background-color: rgba(0,0,0,.04);
+}

@@ -1,0 +1,26 @@
+<mat-card>
+    <div class="field-row">
+        <mat-form-field class="gray-field margin-right10">
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput [(ngModel)]="searchKey" placeholder="Nome ou Doc#"/>
+            <mat-icon matSuffix (click)="doSearch()">arrow_forward</mat-icon>
+        </mat-form-field>
+        
+        <mat-form-field class="full">
+            <mat-label>Destinatário</mat-label>
+            <input matInput disabled [value]="selectedFarmer?.name" />
+        </mat-form-field>
+    </div>
+
+    <div class="field-row">
+        <mat-form-field class="margin-right10">
+            <mat-label>Doc</mat-label>
+            <input matInput disabled [value]="selectedFarmer?.document?.documentNumber" />
+        </mat-form-field>
+        
+        <mat-form-field class="full">
+            <mat-label>Endereço</mat-label>
+            <input matInput disabled [value]="selectedFarmer?.address?.address" />
+        </mat-form-field>
+    </div>
+</mat-card>
