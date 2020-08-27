@@ -1,50 +1,45 @@
-# Farmer Demo Project
+# Farmer POC Project
 
 ## About
-This project is a full solution composed by:
-- WebService: A node.js REST API responsible to search farmers at database.
+This project is composed by:
+- WebService: A node.js REST API responsible to search farmers.
 - WebApp: The web site allows users to search Farmers by doc# or by the farmer name, it consumes the server.
 
 ### Project folder structure
-- `/server`: a [Nest.js](https://nestjs.com/) webservice (express). 
+- `/server`: a webservice that uses [Nest.js](https://nestjs.com/), a powerfull framework on top of Express. 
 - `/wepapp`: a SPA built-in [Angular 7](https://angular.io/) front-end app.
 
 
-## Running
-Both **web-app** and **server** are runnable via [Docker](docker.com). Please run from the root folder:
+# Installing locally
+
+Please checkout this repository in your local env.:
 
 ```
-docker-compose up --build
+git clone https://github.com/lucasmendonca/farmers-poc.git
 ```
+Note: For both projects please make sure that you are running with Node.js version > 11.x;
 
-After the full build process:
-- The webapp should be reachable on `http://localhost:8081`.
-- The webservice should be reachable on `http://localhost:3000/farmers/search`.
+## WebService
 
-### Running web-app
-If you want to run just the **webapp** please run:
-```
-docker-compose up --build webapp
-```
+### Running 
+In local enviroment install the dependencies:
+- `cd server`
+- `npm install`
 
-### Running server
-If you want to run just the **server** please run:
-```
-docker-compose up --build server
-```
+and build the project:
+- `npm run start`
 
-### Consuming web-service
+The server should start listening at `http://localhost:3000`.
 
-Request:
+![Example](demos/server.png)
+
+#### Example of how to consume the web-server
+Example of request:
 
 ```cmd
-curl -X POST \
-  http://localhost:3000/farmers/search \
-  -H 'Content-Type: application/json' \
-  -H 'cache-control: no-cache' \
-  -d '{
-   "key": "Lucas"
-}'
+curl -X GET \
+  'http://localhost:3000/farmers/search?key=lucas' \
+  -H 'cache-control: no-cache'
 ```
 
 Response:
@@ -52,57 +47,52 @@ Response:
 ```json
 [
     {
-        "id": "224ne",
-        "name": "Lucas Mendonca",
         "address": {
-            "address": "Rua Paraguai",
+            "address": "Rua Paraguai 79 30340740",
             "country": "Brasil",
             "state": "MG",
             "street": "Rua Paraguai"
         },
         "document": {
-            "documentNumber": "475.122.829-11",
+            "documentNumber": "475.122.829-00",
             "documentType": "rg"
-        }
+        },
+        "id": "1abc",
+        "name": "Lucas Mendonca"
     }
 ]
 ```
 
-## Automated tests
-In local enviroment install the dependencies, if you didn't it before:
-- `cd server`
-- `npm install`
+The webservice is using mocked data. Please consult the [mocked-data](server/src/constants/mocked-farmers.ts) to see available values.
 
-and after you ca run:
+### Automated tests
+To check automated tests, please run:
 - `npm run test`  (for unit-tests)
 - `npm run test:e2e` (for e2e tests)
 
-Also, you can run automated tests via Docker build, checking the outputs:
 
-```
-docker-compose up --build server
-```
-
-
-## Installing locally
-
-### Web-app
-If you want to install and run it locally, please do the steps:
+## Webapp
+### Running 
+In local enviroment install the dependencies:
 - `cd webapp`
 - `npm install`
+
+then build the project:
 - `npm run start`
 
-The web-app will be listening on `http://localhost:3000`.
+Open your browser and navigate to `http://localhost:4200`.
 
+### How to use:
+Search for a Name/Document Number, then click on the right side arrow. The app will search for the Name/Doc# and fill other fields in case a Farmer is found.
 
-### Server
-If you want to install and run it locally, please do the steps:
-- `cd server`
-- `npm install`
-- `npm run start`
+    NOTE: please make sure the WebService is running at `http://localhost:3000`.
 
-The web-service will be listening on `http://localhost:3000/farmers/search`.
+![Example](demos/app.png)
+
+## Automated tests
+To check automated tests, please run:
+- `npm run test`  (for unit-tests)
 
 ## Copyright/Contact
-Lucas Mendonça. (lucasnix@gmail.com)
+Lucas Mendonça (lucasnix@gmail.com).
 
