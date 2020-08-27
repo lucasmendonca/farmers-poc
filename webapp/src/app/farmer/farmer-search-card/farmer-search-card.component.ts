@@ -2,7 +2,6 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 
 import { FarmerSearchAbstractProvider } from "../farmer-search-provider.interface";
 import { Farmer } from "../../models/farmer.interface";
-import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: "farmer-search-card",
@@ -30,13 +29,4 @@ export class FarmerSearchCardComponent {
     this.selectedFarmer = farmer;
     this.onFarmerSelectedEvent.next(this.selectedFarmer);
   }
-
-  // private buildForm(): void {
-  //   this.messageForm = this.fb.group({
-  //       message : [null, [Validators.required]],
-  //       receivers_user_id : [null, [Validators.required]]
-  //   });
-
-  //   this.getUserIdFromRoute();
-  // }
 }
